@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Dropdown.css'; // Assuming you will create this CSS file for styling
+import './Dropdown.css'; 
 
 const Dropdown = ({ items }) => {
   const [isOpen, setIsOpen] = useState(false);
