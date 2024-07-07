@@ -1,25 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { useState } from 'react';
+import './App.css'
 
-function App() {
+const App = () => {
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState('Select');
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleItemClick = (item) => {
+    setSelectedItem(item);
+    setIsOpen(false);
+  };
+
+  const handleMouseEnter = () => {
+    setIsOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsOpen(false);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Should you use a dropdown?</h1>
+      <div className="dropdown" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+      <div className="dropdown-toggle" onClick={toggleDropdown}>
+        {selectedItem}
+        <span className="arrow">{isOpen ? '▲' : '▼'}</span>
+      </div>
+      {isOpen && (
+        <div className="dropdown-menu">
+
+            <div className="dropdown-item" onClick={() => handleItemClick("Yes")}> Yes</div>
+            <div className="dropdown-item" onClick={() => handleItemClick("Probably Not")}> Probably Not</div>
+        </div>
+      )}
+    </div>
     </div>
   );
-}
+};
 
 export default App;
